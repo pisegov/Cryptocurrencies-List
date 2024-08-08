@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google {
@@ -19,5 +21,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Cryptocurrencies List"
+rootProject.name = "Cryptocurrencies-List"
 include(":app")
+include(":core:ui")
+include(":core:viewmodel-inject")
