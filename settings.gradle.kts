@@ -25,3 +25,5 @@ rootProject.name = "Cryptocurrencies-List"
 include(":app")
 include(":core:ui")
 include(":core:viewmodel-inject")
+include(":core:network")
+include(":core:coin")

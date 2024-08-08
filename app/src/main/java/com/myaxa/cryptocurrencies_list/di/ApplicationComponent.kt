@@ -19,7 +19,13 @@ interface ApplicationComponent : ViewModelFactoryProvider {
     }
 }
 
-@Module(includes =[UniversalViewModelFactoryModule::class])
+@Module(
+    includes = [
+        UniversalViewModelFactoryModule::class,
+        NetworkModule::class,
+        CoinDepsModule::class,
+    ]
+)
 interface ApplicationModule
 
 @Scope

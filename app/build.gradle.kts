@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -15,6 +17,13 @@ android {
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+
+        val properties= Properties().apply {
+            load(rootProject.file("local.properties").inputStream())
+        }
+
+        buildConfigField("String", "BASE_URL", properties.getProperty("BASE_URL"))
+        buildConfigField("String", "API_KEY", properties.getProperty("API_KEY"))
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -40,6 +49,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     packaging {
         resources {
@@ -56,11 +66,15 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
 
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
 
     implementation(projects.core.ui)
     implementation(projects.core.viewmodelInject)
+    implementation(projects.core.network)
+    implementation(projects.core.coin)
 
     testImplementation(libs.junit)
 
