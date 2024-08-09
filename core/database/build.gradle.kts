@@ -1,11 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.myaxa.core.coin"
+    namespace = "com.myaxa.core.database"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -28,12 +28,6 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.javax.inject)
-    implementation(libs.bundles.ktor)
     implementation(libs.bundles.room)
-
-    runtimeOnly(libs.androidx.annotation)
-
-    implementation(projects.core.network)
-    implementation(projects.core.database)
+    ksp(libs.androidx.room.compiler)
 }

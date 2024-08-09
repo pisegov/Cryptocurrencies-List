@@ -8,7 +8,7 @@ import com.myaxa.cryptocurrencies_list.di.DaggerApplicationComponent
 
 class CryptocurrenciesListApplication : Application(), ViewModelFactoryProvider {
     private val component: ApplicationComponent by lazy {
-        DaggerApplicationComponent.factory().create()
+        DaggerApplicationComponent.factory().create(this)
     }
 
     override val viewModelFactory: ViewModelProvider.Factory

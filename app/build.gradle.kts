@@ -74,6 +74,7 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.viewmodelInject)
     implementation(projects.core.network)
+    implementation(projects.core.database)
     implementation(projects.core.coin)
 
     testImplementation(libs.junit)
