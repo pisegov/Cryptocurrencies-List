@@ -66,6 +66,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
 
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.dagger)
@@ -76,6 +77,7 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.database)
     implementation(projects.core.coin)
+    implementation(projects.features.coinList)
 
     testImplementation(libs.junit)
 

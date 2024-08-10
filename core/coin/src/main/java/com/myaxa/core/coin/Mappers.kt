@@ -5,7 +5,6 @@ import com.myaxa.core.coin.domain.Currency
 import com.myaxa.core.coin.domain.ListCoin
 import com.myaxa.core.database.coin.entities.CoinDetailsFull
 import com.myaxa.core.database.coin.entities.CoinWithPrices
-import java.lang.IllegalArgumentException
 
 internal fun CoinWithPrices.toListCoin(currency: Currency): ListCoin {
     val price = prices.associateBy { it.currency }[currency.name]
@@ -17,7 +16,7 @@ internal fun CoinWithPrices.toListCoin(currency: Currency): ListCoin {
         symbol = coin.symbol,
         image = coin.image,
         currentPrice = price.currentPrice,
-        priceChangePercentage24h = price.priceChangePercentage24h,
+        priceChangePercentage = price.priceChangePercentage24h,
     )
 }
 

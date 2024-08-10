@@ -6,5 +6,5 @@ data class ListCoin(
     val symbol: String,
     val image: String,
     val currentPrice: Double,
-    val priceChangePercentage24h: Double,
+    val priceChangePercentage: Double,
 )

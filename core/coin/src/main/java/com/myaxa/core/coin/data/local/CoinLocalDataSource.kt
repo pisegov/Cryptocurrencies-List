@@ -66,5 +66,5 @@ internal fun ListCoin.toCoinPrices(currency: Currency) = CoinPriceEntity(
     coinId = id,
     currency = currency.name,
     currentPrice = currentPrice,
-    priceChangePercentage24h = priceChangePercentage24h,
+    priceChangePercentage24h = priceChangePercentage,
 )

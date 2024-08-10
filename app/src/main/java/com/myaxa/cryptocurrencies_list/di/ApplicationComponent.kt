@@ -3,6 +3,7 @@ package com.myaxa.cryptocurrencies_list.di
 import android.app.Application
 import com.myaxa.core.viewmodel_inject.UniversalViewModelFactoryModule
 import com.myaxa.core.viewmodel_inject.ViewModelFactoryProvider
+import com.myaxa.features.coin_list.di.CoinListDepsModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -27,6 +28,7 @@ interface ApplicationComponent : ViewModelFactoryProvider {
         NetworkModule::class,
         DatabaseModule::class,
         CoinDepsModule::class,
+        CoinListDepsModule::class,
     ]
 )
 interface ApplicationModule

@@ -1,5 +1,5 @@
 package com.myaxa.core.coin.domain
 
-enum class Currency {
-    USD, RUB;
+enum class Currency(val symbol: Char) {
+    USD('$'), RUB('₽');
 }

@@ -18,7 +18,7 @@ internal data class ListCoinRemote(
     @SerialName("current_price")
     val currentPrice: Double,
     @SerialName("price_change_percentage_24h")
-    val priceChangePercentage24h: Double,
+    val priceChangePercentage: Double,
 ){
     fun toDomainModel(): ListCoin = ListCoin(
         id = id,
@@ -26,6 +26,6 @@ internal data class ListCoinRemote(
         symbol = symbol,
         image = image,
         currentPrice = currentPrice,
-        priceChangePercentage24h = priceChangePercentage24h,
+        priceChangePercentage = priceChangePercentage,
     )
 }
