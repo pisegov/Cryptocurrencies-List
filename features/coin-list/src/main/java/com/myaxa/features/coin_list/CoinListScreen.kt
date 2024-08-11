@@ -20,6 +20,7 @@ internal fun CoinListScreen(
 
     CoinListContent(
         uiState = uiState,
-        onCurrencySelected = { viewModel.obtainUserEvent(Event.User.ChangeCurrency(it)) }
+        onCurrencySelected = { viewModel.obtainUserEvent(Event.User.ChangeCurrency(it)) },
+        onRetryClicked = { viewModel.obtainUserEvent(Event.User.LoadInitial) },
     )
 }

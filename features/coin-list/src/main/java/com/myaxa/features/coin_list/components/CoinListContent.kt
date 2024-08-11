@@ -1,18 +1,16 @@
 package com.myaxa.features.coin_list.components
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.myaxa.core.coin.domain.Currency
+import com.myaxa.core.ui.components.NetworkErrorScreenComponent
+import com.myaxa.core.ui.components.ProgressIndicatorComponent
 import com.myaxa.features.coin_list.mvi.LoadingStatus
 import com.myaxa.features.coin_list.mvi.State
 
@@ -20,6 +18,7 @@ import com.myaxa.features.coin_list.mvi.State
 internal fun CoinListContent(
     uiState: State,
     onCurrencySelected: (Currency) -> Unit,
+    onRetryClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -36,21 +35,13 @@ internal fun CoinListContent(
                 CoinListComponent(uiState = uiState)
             }
 
-            uiState.list.isEmpty() && uiState.loadingStatus is LoadingStatus.Loading -> {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    CircularProgressIndicator()
+            uiState.list.isEmpty() -> when (uiState.loadingStatus) {
+                LoadingStatus.Loading -> {
+                    ProgressIndicatorComponent(modifier = modifier.fillMaxSize())
                 }
-            }
 
-            uiState.list.isEmpty() && uiState.loadingStatus is LoadingStatus.Failure -> {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    Text(uiState.loadingStatus.message)
+                LoadingStatus.Idle, is LoadingStatus.Failure -> {
+                    NetworkErrorScreenComponent(onRetryClicked = onRetryClicked)
                 }
             }
 

@@ -35,7 +35,7 @@ internal fun CurrencyButtonComponent(
     ) {
         Text(
             text = currency.name,
-            Modifier.padding(vertical = 6.dp, horizontal = 28.dp)
+            Modifier.padding(vertical = 8.dp, horizontal = 28.dp)
         )
     }
 }

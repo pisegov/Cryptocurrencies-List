@@ -22,5 +22,5 @@ internal data class State(
 internal sealed interface LoadingStatus {
     data object Idle : LoadingStatus
     data object Loading : LoadingStatus
-    data class Failure(val message: String) : LoadingStatus
+    data object Failure : LoadingStatus
 }

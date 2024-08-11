@@ -35,4 +35,6 @@ dependencies {
     implementation(libs.bundles.compose)
 
     implementation(libs.javax.inject)
+
+    debugImplementation(libs.ui.tooling)
 }

@@ -43,9 +43,7 @@ internal class Reducer @Inject constructor() {
         is Event.System.Loaded -> {
             val list = event.result
                 .onFailure {
-                    return state.copy(
-                        loadingStatus = LoadingStatus.Failure(it.message ?: "Unknown error")
-                    )
+                    return state.copy(loadingStatus = LoadingStatus.Failure)
                 }
                 .getOrThrow()
 
