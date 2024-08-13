@@ -21,6 +21,8 @@ import com.myaxa.core.ui.theme.DarkGreen
 import com.myaxa.core.ui.throttledClickListener.throttledClickable
 import com.myaxa.features.coin_list.model.ListCoinUi
 import com.myaxa.features.coin_list.model.PriceChangePercentage
+import com.myaxa.features.coin_list.mvi.CoinListEffect
+import com.myaxa.features.coin_list.mvi.Event
 import com.myaxa.features.coin_list.mvi.LoadingStatus
 import com.myaxa.features.coin_list.mvi.State
 import com.myaxa.features.coin_list.mvi.isRefreshFailure
@@ -29,22 +31,21 @@ import com.myaxa.features.coin_list.mvi.isRefreshing
 @Composable
 internal fun CoinListComponent(
     uiState: State,
-    onCoinSelected: (ListCoinUi) -> Unit,
-    onRefresh: () -> Unit,
-    onErrorMessageShown: () -> Unit,
+    sendUserEvent: (Event.User) -> Unit,
+    handleScreenEffect: (CoinListEffect) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
     LaunchedEffect(uiState) {
         if (uiState.isRefreshFailure()) {
             Toast.makeText(context, "Произошла ошибка при загрузке", Toast.LENGTH_SHORT).show()
-            onErrorMessageShown()
+            sendUserEvent(Event.User.SetErrorShown)
         }
     }
 
     PullToRefreshLazyColumnComponent(
         isRefreshing = uiState.isRefreshing(),
-        onRefresh = onRefresh,
+        onRefresh = { sendUserEvent(Event.User.Reload) },
         contentPadding = PaddingValues(
             top = 8.dp,
             bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
@@ -59,7 +60,14 @@ internal fun CoinListComponent(
             item {
                 CoinComponent(
                     coin = it,
-                    modifier = Modifier.throttledClickable { onCoinSelected(it) })
+                    modifier = Modifier.throttledClickable {
+                        handleScreenEffect(
+                            CoinListEffect.NavigateToCoinDetails(
+                                id = it.id,
+                                name = it.name,
+                            )
+                        )
+                    })
             }
         }
     }
@@ -82,8 +90,7 @@ private fun CoinListComponentPreview() {
             currentCurrency = Currency.USD,
             loadingStatus = LoadingStatus.Idle
         ),
-        onCoinSelected = {},
-        onRefresh = {},
-        onErrorMessageShown = {},
+        sendUserEvent = {},
+        handleScreenEffect = {},
     )
 }

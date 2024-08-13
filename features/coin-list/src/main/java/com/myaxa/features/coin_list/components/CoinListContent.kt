@@ -11,21 +11,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
-import com.myaxa.core.coin.domain.Currency
 import com.myaxa.core.ui.components.NetworkErrorScreenComponent
 import com.myaxa.core.ui.components.ProgressIndicatorComponent
-import com.myaxa.features.coin_list.model.ListCoinUi
+import com.myaxa.features.coin_list.mvi.CoinListEffect
+import com.myaxa.features.coin_list.mvi.Event
 import com.myaxa.features.coin_list.mvi.LoadingStatus
 import com.myaxa.features.coin_list.mvi.State
 
 @Composable
 internal fun CoinListContent(
     uiState: State,
-    onCurrencySelected: (Currency) -> Unit,
-    onCoinSelected: (ListCoinUi) -> Unit,
-    onRefresh: () -> Unit,
-    onErrorMessageShown: () -> Unit,
-    onRetryClicked: () -> Unit,
+    sendUserEvent: (Event.User) -> Unit,
+    handleScreenEffect: (CoinListEffect) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val layoutDirection = LocalLayoutDirection.current
@@ -41,15 +38,14 @@ internal fun CoinListContent(
     ) {
         CoinListToolbarComponent(
             currentCurrency = uiState.currentCurrency,
-            onCurrencySelected = onCurrencySelected
+            onCurrencySelected = { sendUserEvent(Event.User.ChangeCurrency(it)) }
         )
         when {
             uiState.list.isNotEmpty() -> {
                 CoinListComponent(
                     uiState = uiState,
-                    onCoinSelected = onCoinSelected,
-                    onRefresh = onRefresh,
-                    onErrorMessageShown = onErrorMessageShown,
+                    sendUserEvent = sendUserEvent,
+                    handleScreenEffect = handleScreenEffect,
                 )
             }
 
@@ -59,7 +55,9 @@ internal fun CoinListContent(
                 }
 
                 LoadingStatus.Idle, is LoadingStatus.Failure -> {
-                    NetworkErrorScreenComponent(onRetryClicked = onRetryClicked)
+                    NetworkErrorScreenComponent(
+                        onRetryClicked = { sendUserEvent(Event.User.LoadInitial) },
+                    )
                 }
             }
         }

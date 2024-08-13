@@ -22,14 +22,7 @@ internal fun CoinListScreen(
 
     CoinListContent(
         uiState = uiState,
-        onCurrencySelected = { viewModel.obtainUserEvent(Event.User.ChangeCurrency(it)) },
-        onCoinSelected = {
-            effectHandler(
-                CoinListEffect.NavigateToCoinDetails(id = it.id, name = it.name)
-            )
-        },
-        onRefresh = { viewModel.obtainUserEvent(Event.User.Reload) },
-        onRetryClicked = { viewModel.obtainUserEvent(Event.User.LoadInitial) },
-        onErrorMessageShown = {viewModel.obtainUserEvent(Event.User.SetErrorShown)}
+        sendUserEvent = { viewModel.obtainUserEvent(it) },
+        handleScreenEffect = { effectHandler(it) },
     )
 }
