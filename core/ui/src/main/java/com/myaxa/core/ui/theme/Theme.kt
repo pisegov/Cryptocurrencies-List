@@ -10,26 +10,28 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80,
-    errorContainer = Red,
+private val lightScheme = lightColorScheme(
+    primary = primaryLight,
+    onPrimary = onPrimaryLight,
+    primaryContainer = primaryContainerLight,
+    onPrimaryContainer = onPrimaryContainerLight,
+    errorContainer = errorContainerLight,
+    onErrorContainer = onErrorContainerLight,
+    onSurfaceVariant = onSurfaceVariantLight,
+    outline = outlineLight,
+    surfaceContainerHighest = surfaceContainerHighestLight,
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = SeaBuckHorn,
-    secondary = PurpleGrey40,
-    tertiary = Pink40,
-    errorContainer = Red,
-    /* Other default colors to override
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+private val darkScheme = darkColorScheme(
+    primary = primaryDark,
+    onPrimary = onPrimaryDark,
+    primaryContainer = primaryContainerDark,
+    onPrimaryContainer = onPrimaryContainerDark,
+    errorContainer = errorContainerDark,
+    onErrorContainer = onErrorContainerDark,
+    onSurfaceVariant = onSurfaceVariantDark,
+    outline = outlineDark,
+    surfaceContainerHighest = surfaceContainerHighestDark,
 )
 
 @Composable
@@ -45,8 +47,8 @@ fun CryptocurrenciesListTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> darkScheme
+        else -> lightScheme
     }
 
     MaterialTheme(

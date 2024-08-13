@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,8 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.myaxa.core.ui.debugPlaceholder
-import com.myaxa.core.ui.theme.Gray
-import com.myaxa.core.ui.theme.TitleColor
 import com.myaxa.features.coin_list.model.ListCoinUi
 import com.myaxa.features.coin_list.model.PriceChangePercentage
 import com.myaxa.core.ui.R as CoreUiR
@@ -54,11 +53,11 @@ internal fun CoinComponent(
                     lineHeight = 16.sp,
                     fontFamily = FontFamily.Serif,
                     fontWeight = FontWeight.Bold,
-                    color = TitleColor
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
                     coin.symbol.uppercase(),
-                    color = Gray,
+                    color = MaterialTheme.colorScheme.outline,
                     fontSize = 14.sp,
                     lineHeight = 14.sp,
                 )
@@ -74,7 +73,7 @@ internal fun CoinComponent(
                 lineHeight = 16.sp,
                 fontFamily = FontFamily.Serif,
                 fontWeight = FontWeight.Bold,
-                color = TitleColor
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(
                 text = coin.priceChangePercentage.value,

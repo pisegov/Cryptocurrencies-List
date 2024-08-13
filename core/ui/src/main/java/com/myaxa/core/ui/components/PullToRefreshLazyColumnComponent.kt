@@ -2,6 +2,7 @@ package com.myaxa.core.ui.components
 
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
@@ -38,6 +40,11 @@ fun PullToRefreshLazyColumnComponent(
 ) {
 
     val pullToRefreshState = rememberPullToRefreshState()
+    val indicatorContainerColor = if (isSystemInDarkTheme()) {
+        MaterialTheme.colorScheme.surfaceBright
+    } else {
+        MaterialTheme.colorScheme.surface
+    }
 
     if (pullToRefreshState.isRefreshing) {
         LaunchedEffect(Unit) {
@@ -71,6 +78,7 @@ fun PullToRefreshLazyColumnComponent(
 
         PullToRefreshContainer(
             state = pullToRefreshState,
+            containerColor = indicatorContainerColor,
             modifier = Modifier
                 .align(Alignment.TopCenter)
         )

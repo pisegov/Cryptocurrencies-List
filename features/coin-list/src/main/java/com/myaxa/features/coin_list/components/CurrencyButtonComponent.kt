@@ -10,9 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.myaxa.core.coin.domain.Currency
-import com.myaxa.core.ui.theme.Alto
-import com.myaxa.core.ui.theme.PearlLusta
-import com.myaxa.core.ui.theme.SeaBuckHorn
 
 @Composable
 internal fun CurrencyButtonComponent(
@@ -24,10 +21,10 @@ internal fun CurrencyButtonComponent(
     Card(
         shape = RoundedCornerShape(100),
         colors = CardColors(
-            Alto,
-            MaterialTheme.colorScheme.onBackground,
-            PearlLusta,
-            SeaBuckHorn,
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            contentColor = MaterialTheme.colorScheme.onSurface,
+            disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            disabledContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         ),
         onClick = { onClick(currency) },
         modifier = modifier,
@@ -35,7 +32,7 @@ internal fun CurrencyButtonComponent(
     ) {
         Text(
             text = currency.name,
-            Modifier.padding(vertical = 8.dp, horizontal = 28.dp)
+            Modifier.padding(vertical = 8.dp, horizontal = 36.dp)
         )
     }
 }

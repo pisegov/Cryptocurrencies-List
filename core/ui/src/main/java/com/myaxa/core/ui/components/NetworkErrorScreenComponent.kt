@@ -17,11 +17,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.myaxa.core.ui.DayNightPreview
 import com.myaxa.core.ui.R
-import com.myaxa.core.ui.theme.Orange
+import com.myaxa.core.ui.ThemedPreview
 
 @Composable
 fun NetworkErrorScreenComponent(
@@ -46,7 +46,7 @@ fun NetworkErrorScreenComponent(
         )
         Button(
             colors = ButtonColors(
-                Orange,
+                MaterialTheme.colorScheme.primary,
                 MaterialTheme.colorScheme.onPrimary,
                 disabledContainerColor = Color.Gray,
                 disabledContentColor = Color.Black
@@ -64,8 +64,8 @@ fun NetworkErrorScreenComponent(
     }
 }
 
-@Preview(showBackground = true)
+@DayNightPreview
 @Composable
-private fun NetworkErrorScreenComponentPreview() {
+private fun NetworkErrorScreenComponentPreview() = ThemedPreview {
     NetworkErrorScreenComponent({})
 }

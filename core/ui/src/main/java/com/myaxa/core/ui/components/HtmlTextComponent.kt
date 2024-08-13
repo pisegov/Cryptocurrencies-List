@@ -3,6 +3,7 @@ package com.myaxa.core.ui.components
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
@@ -15,12 +16,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.core.text.HtmlCompat
+import com.myaxa.core.ui.theme.Link
 
 @Composable
 fun HtmlTextComponent(
     html: String,
-    linkColor: Color = Color.Blue,
-    textColor: Color = Color.DarkGray,
+    linkColor: Color = Color.Link,
+    textColor: Color = MaterialTheme.colorScheme.onSurface,
     fontSize: TextUnit = 11.sp,
     fontWeight: FontWeight = FontWeight.Normal
 ) {

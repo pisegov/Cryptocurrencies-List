@@ -29,7 +29,7 @@ fun Snackbar(
     ) {
         Text(
             text = snackbarData.visuals.message,
-            color = MaterialTheme.colorScheme.onError,
+            color = MaterialTheme.colorScheme.onErrorContainer,
             fontSize = 14.sp,
             lineHeight = 14.sp,
             modifier = Modifier.padding(16.dp)
