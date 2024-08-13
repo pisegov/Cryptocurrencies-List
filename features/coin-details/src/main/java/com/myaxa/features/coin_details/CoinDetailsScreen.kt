@@ -11,6 +11,7 @@ import com.myaxa.core.viewmodel_inject.daggerViewModel
 import com.myaxa.features.coin_details.components.CoinDetailsContent
 import com.myaxa.features.coin_details.mvi.CoinDetailsEffect
 import com.myaxa.features.coin_details.mvi.Event
+import com.myaxa.features.coin_details.mvi.isInitialized
 
 @Composable
 internal fun CoinDetailsScreen(
@@ -22,6 +23,8 @@ internal fun CoinDetailsScreen(
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(viewModel) {
+        if (state.isInitialized()) return@LaunchedEffect
+
         viewModel.obtainUserEvent(event = Event.User.Load(coinId))
     }
 

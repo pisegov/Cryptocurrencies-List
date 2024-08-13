@@ -54,11 +54,14 @@ internal fun CoinListContent(
                     ProgressIndicatorComponent(modifier = modifier.fillMaxSize())
                 }
 
-                LoadingStatus.Idle, is LoadingStatus.Failure -> {
+                is LoadingStatus.Failure -> {
                     NetworkErrorScreenComponent(
                         onRetryClicked = { sendUserEvent(Event.User.LoadInitial) },
                     )
                 }
+
+                // Initial state, show empty screen
+                LoadingStatus.Idle -> {}
             }
         }
     }

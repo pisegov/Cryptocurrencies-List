@@ -11,3 +11,5 @@ internal data class State(
         fun initial() = State(loadingStatus = LoadingStatus.Loading)
     }
 }
+
+internal fun State.isInitialized() = this.loadingStatus != LoadingStatus.Loading

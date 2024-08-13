@@ -8,6 +8,7 @@ import com.myaxa.core.viewmodel_inject.daggerViewModel
 import com.myaxa.features.coin_list.components.CoinListContent
 import com.myaxa.features.coin_list.mvi.CoinListEffect
 import com.myaxa.features.coin_list.mvi.Event
+import com.myaxa.features.coin_list.mvi.isInitialized
 
 @Composable
 internal fun CoinListScreen(
@@ -17,6 +18,8 @@ internal fun CoinListScreen(
     val uiState by viewModel.state.collectAsState()
 
     LaunchedEffect(viewModel) {
+        if (uiState.isInitialized()) return@LaunchedEffect
+
         viewModel.obtainUserEvent(Event.User.LoadInitial)
     }
 

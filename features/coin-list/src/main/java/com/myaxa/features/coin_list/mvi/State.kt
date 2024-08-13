@@ -15,11 +15,13 @@ internal data class State(
         fun initial() = State(
             currentCurrency = Currency.USD,
             list = emptyList(),
-            loadingStatus = LoadingStatus.Loading
+            loadingStatus = LoadingStatus.Idle
         )
     }
 }
 
 internal fun State.isRefreshing() = list.isNotEmpty() && loadingStatus is LoadingStatus.Loading
+
+internal fun State.isInitialized() = list.isNotEmpty() || loadingStatus !is LoadingStatus.Idle
 
 internal fun State.isRefreshFailure() = list.isNotEmpty() && loadingStatus is LoadingStatus.Failure
