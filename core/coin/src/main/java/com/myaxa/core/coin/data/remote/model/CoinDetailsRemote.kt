@@ -21,7 +21,7 @@ internal data class CoinDetailsRemote(
     fun toDomainModel(): CoinDetails1 = CoinDetails1(
         id = id,
         name = name,
-        image = image.small,
+        imageUrl = image.small,
         description = description.en,
         categories = categories
     )

@@ -24,7 +24,7 @@ internal fun CoinDetailsFull.toCoinDetails(): CoinDetails {
     return CoinDetails(
         id = coin.coinId,
         name = coin.name,
-        image = coin.image,
+        imageUrl = coin.image,
         description = description.text,
         categories = categories.map { it.name },
     )

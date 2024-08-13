@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.myaxa.core.coin.domain.Currency
 import com.myaxa.core.ui.theme.DarkGreen
+import com.myaxa.core.ui.throttledClickListener.throttledClickable
 import com.myaxa.features.coin_list.model.ListCoinUi
 import com.myaxa.features.coin_list.model.PriceChangePercentage
 import com.myaxa.features.coin_list.mvi.LoadingStatus
@@ -22,6 +23,7 @@ import com.myaxa.features.coin_list.mvi.State
 internal fun CoinListComponent(
     uiState: State,
     modifier: Modifier = Modifier,
+    onCoinSelected: (ListCoinUi) -> Unit = {},
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -38,7 +40,11 @@ internal fun CoinListComponent(
                 .padding(horizontal = 16.dp)
         ) {
             uiState.list.forEach {
-                item { CoinComponent(coin = it) }
+                item {
+                    CoinComponent(
+                        coin = it,
+                        modifier = Modifier.throttledClickable { onCoinSelected(it) })
+                }
             }
         }
     }

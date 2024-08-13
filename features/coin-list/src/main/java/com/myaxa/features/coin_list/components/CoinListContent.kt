@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import com.myaxa.core.coin.domain.Currency
 import com.myaxa.core.ui.components.NetworkErrorScreenComponent
 import com.myaxa.core.ui.components.ProgressIndicatorComponent
+import com.myaxa.features.coin_list.model.ListCoinUi
 import com.myaxa.features.coin_list.mvi.LoadingStatus
 import com.myaxa.features.coin_list.mvi.State
 
@@ -18,6 +19,7 @@ import com.myaxa.features.coin_list.mvi.State
 internal fun CoinListContent(
     uiState: State,
     onCurrencySelected: (Currency) -> Unit,
+    onCoinSelected: (ListCoinUi) -> Unit,
     onRetryClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -32,7 +34,7 @@ internal fun CoinListContent(
         )
         when {
             uiState.list.isNotEmpty() && uiState.loadingStatus is LoadingStatus.Idle -> {
-                CoinListComponent(uiState = uiState)
+                CoinListComponent(uiState = uiState, onCoinSelected = onCoinSelected)
             }
 
             uiState.list.isEmpty() -> when (uiState.loadingStatus) {

@@ -81,6 +81,7 @@ dependencies {
     implementation(projects.core.database)
     implementation(projects.core.coin)
     implementation(projects.features.coinList)
+    implementation(projects.features.coinDetails)
 
     testImplementation(libs.junit)
 
