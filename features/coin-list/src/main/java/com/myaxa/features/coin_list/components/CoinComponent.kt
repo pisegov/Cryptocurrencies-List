@@ -17,10 +17,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.myaxa.core.ui.debugPlaceholder
 import com.myaxa.core.ui.theme.Gray
 import com.myaxa.core.ui.theme.TitleColor
 import com.myaxa.features.coin_list.model.ListCoinUi
 import com.myaxa.features.coin_list.model.PriceChangePercentage
+import com.myaxa.core.ui.R as CoreUiR
 
 @Composable
 internal fun CoinComponent(
@@ -37,9 +39,9 @@ internal fun CoinComponent(
         Row {
             AsyncImage(
                 model = coin.imageUrl,
+                placeholder = debugPlaceholder(debugPreview = CoreUiR.drawable.bitcoin_image),
                 contentDescription = "Coin image",
-                modifier
-                    .size(44.dp, 44.dp)
+                modifier = modifier.size(44.dp)
             )
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -88,13 +90,14 @@ internal fun CoinComponent(
 @Preview(showBackground = true)
 private fun CoinComponentPreview() {
     CoinComponent(
-        ListCoinUi(
+        coin = ListCoinUi(
             "bitcoin",
             "Bitcoin",
             "btc",
-            "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+            "",
             "1000000.0",
             PriceChangePercentage("7.520", Color.DarkGray)
         ),
+        modifier = Modifier.padding(horizontal = 8.dp)
     )
 }
