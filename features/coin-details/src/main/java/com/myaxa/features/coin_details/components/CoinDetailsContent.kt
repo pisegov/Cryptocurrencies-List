@@ -2,10 +2,17 @@ package com.myaxa.features.coin_details.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
 import com.myaxa.core.ui.components.NetworkErrorScreenComponent
 import com.myaxa.core.ui.components.ProgressIndicatorComponent
@@ -21,10 +28,16 @@ internal fun CoinDetailsContent(
     onBackClicked: () -> Unit = {},
     onRetryClicked: () -> Unit = {},
 ) {
+    val layoutDirection = LocalLayoutDirection.current
+    val systemBarsPadding = WindowInsets.systemBars.asPaddingValues()
+    val startPadding = systemBarsPadding.calculateStartPadding(layoutDirection)
+    val endPadding = systemBarsPadding.calculateEndPadding(layoutDirection)
+
     Column(
         verticalArrangement = Arrangement.Top,
         modifier = modifier
             .fillMaxSize()
+            .padding(start = startPadding, end = endPadding)
     ) {
         CoinDetailsToolbar(
             title = coinName,
