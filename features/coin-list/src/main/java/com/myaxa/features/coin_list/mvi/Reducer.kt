@@ -40,6 +40,10 @@ internal class Reducer @Inject constructor() {
             state.copy(loadingStatus = LoadingStatus.Loading)
         }
 
+        Event.User.SetErrorShown -> {
+            state.copy(loadingStatus = LoadingStatus.Idle)
+        }
+
         is Event.System.Loaded -> {
             val list = event.result
                 .onFailure {

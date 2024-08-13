@@ -28,6 +28,8 @@ internal fun CoinListScreen(
                 CoinListEffect.NavigateToCoinDetails(id = it.id, name = it.name)
             )
         },
+        onRefresh = { viewModel.obtainUserEvent(Event.User.Reload) },
         onRetryClicked = { viewModel.obtainUserEvent(Event.User.LoadInitial) },
+        onErrorMessageShown = {viewModel.obtainUserEvent(Event.User.SetErrorShown)}
     )
 }

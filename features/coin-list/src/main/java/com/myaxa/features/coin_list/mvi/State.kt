@@ -24,3 +24,7 @@ internal sealed interface LoadingStatus {
     data object Loading : LoadingStatus
     data object Failure : LoadingStatus
 }
+
+internal fun State.isRefreshing() = list.isNotEmpty() && loadingStatus is LoadingStatus.Loading
+
+internal fun State.isRefreshFailure() = list.isNotEmpty() && loadingStatus is LoadingStatus.Failure

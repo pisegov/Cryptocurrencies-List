@@ -23,6 +23,8 @@ internal fun CoinListContent(
     uiState: State,
     onCurrencySelected: (Currency) -> Unit,
     onCoinSelected: (ListCoinUi) -> Unit,
+    onRefresh: () -> Unit,
+    onErrorMessageShown: () -> Unit,
     onRetryClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -39,14 +41,19 @@ internal fun CoinListContent(
     ) {
         CoinListToolbarComponent(
             currentCurrency = uiState.currentCurrency,
-            onCurrencySelected = onCurrencySelected,
+            onCurrencySelected = onCurrencySelected
         )
         when {
-            uiState.list.isNotEmpty() && uiState.loadingStatus is LoadingStatus.Idle -> {
-                CoinListComponent(uiState = uiState, onCoinSelected = onCoinSelected)
+            uiState.list.isNotEmpty() -> {
+                CoinListComponent(
+                    uiState = uiState,
+                    onCoinSelected = onCoinSelected,
+                    onRefresh = onRefresh,
+                    onErrorMessageShown = onErrorMessageShown,
+                )
             }
 
-            uiState.list.isEmpty() -> when (uiState.loadingStatus) {
+            else -> when (uiState.loadingStatus) {
                 LoadingStatus.Loading -> {
                     ProgressIndicatorComponent(modifier = modifier.fillMaxSize())
                 }
@@ -55,8 +62,6 @@ internal fun CoinListContent(
                     NetworkErrorScreenComponent(onRetryClicked = onRetryClicked)
                 }
             }
-
-            else -> throw IllegalStateException("Illegal screen state: $uiState")
         }
     }
 }

@@ -15,11 +15,11 @@ internal class Actor @Inject constructor(
     private val _systemEventFlow = MutableSharedFlow<Event.System>(
         replay = 0,
         extraBufferCapacity = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST
+        onBufferOverflow = BufferOverflow.SUSPEND
     )
     val systemEventFlow = _systemEventFlow.asSharedFlow()
 
-    private fun sendEvent(event: Event.System) = _systemEventFlow.tryEmit(event)
+    private suspend fun sendEvent(event: Event.System) = _systemEventFlow.emit(event)
 
     suspend fun processCommand(command: Command) = when (command) {
 

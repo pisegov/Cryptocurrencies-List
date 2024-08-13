@@ -8,9 +8,10 @@ internal sealed interface Event {
         data class ChangeCurrency(val currency: Currency) : User
         data object LoadInitial : User
         data object Reload : User
+        data object SetErrorShown : User
     }
 
     sealed interface System : Event {
-        data class Loaded(val result: Result<List<ListCoinUi>>): System
+        data class Loaded(val result: Result<List<ListCoinUi>>) : System
     }
 }
