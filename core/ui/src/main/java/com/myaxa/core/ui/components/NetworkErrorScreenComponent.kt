@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -35,10 +36,10 @@ fun NetworkErrorScreenComponent(
     ) {
         Image(
             imageVector = ImageVector.vectorResource(id = R.drawable.bitcoin_image),
-            contentDescription = "Cryptocurrency image"
+            contentDescription = stringResource(R.string.cryptocurrency_logo)
         )
         Text(
-            text = "Произошла какая-то ошибка :(\nПопробуем снова?",
+            text = stringResource(R.string.error_occurred_try_again),
             fontSize = 16.sp,
             lineHeight = 16.sp,
             textAlign = TextAlign.Center,
@@ -55,7 +56,7 @@ fun NetworkErrorScreenComponent(
             onClick = onRetryClicked,
         ) {
             Text(
-                text = "Попробовать".uppercase(),
+                text = stringResource(R.string.try_again).uppercase(),
                 fontSize = 14.sp,
                 lineHeight = 14.sp,
                 textAlign = TextAlign.Center,

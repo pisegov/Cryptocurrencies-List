@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="try_again">Попробовать</string>
+    <string name="error_occurred_try_again">Произошла какая-то ошибка :(\nПопробуем снова?</string>
+    <string name="cryptocurrency_logo">Логотип криптовалюты</string>
+</resources>

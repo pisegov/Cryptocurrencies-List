@@ -12,9 +12,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.myaxa.core.ui.debugPlaceholder
+import com.myaxa.features.coin_details.R
 import com.myaxa.features.coin_details.model.CoinDetailsUi
 import com.myaxa.core.ui.R as CoreUiR
 
@@ -38,13 +40,23 @@ internal fun CoinDetailsComponent(
             AsyncImage(
                 model = model.imageUrl,
                 placeholder = debugPlaceholder(debugPreview = CoreUiR.drawable.bitcoin_image),
-                contentDescription = "Coin image",
+                contentDescription = stringResource(id = CoreUiR.string.cryptocurrency_logo),
                 modifier = Modifier.size(90.dp)
             )
         }
-        item { TextSectionComponent(title = "Описание", content = model.description) }
+        item {
+            TextSectionComponent(
+                title = stringResource(R.string.description),
+                content = model.description
+            )
+        }
         if (model.categories.isNotEmpty()) {
-            item { TextSectionComponent(title = "Категории", content = model.categories) }
+            item {
+                TextSectionComponent(
+                    title = stringResource(R.string.categories),
+                    content = model.categories
+                )
+            }
         }
     }
 }

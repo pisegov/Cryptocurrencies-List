@@ -16,6 +16,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.myaxa.core.coin.domain.Currency
@@ -23,6 +24,7 @@ import com.myaxa.core.ui.components.PullToRefreshLazyColumnComponent
 import com.myaxa.core.ui.components.Snackbar
 import com.myaxa.core.ui.theme.DarkGreen
 import com.myaxa.core.ui.throttledClickListener.throttledClickable
+import com.myaxa.features.coin_list.R
 import com.myaxa.features.coin_list.model.ListCoinUi
 import com.myaxa.features.coin_list.model.LoadingStatus
 import com.myaxa.features.coin_list.model.PriceChangePercentage
@@ -41,11 +43,13 @@ internal fun CoinListComponent(
 ) {
 
     val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarText = stringResource(id = R.string.loading_error_was_occurred)
+
     LaunchedEffect(uiState) {
         if (uiState.isRefreshFailure()) {
 
             snackbarHostState.showSnackbar(
-                message = "Произошла ошибка при загрузке",
+                message = snackbarText,
                 withDismissAction = false,
                 actionLabel = "Kek",
                 duration = SnackbarDuration.Short

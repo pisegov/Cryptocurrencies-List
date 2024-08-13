@@ -20,10 +20,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.myaxa.core.ui.throttledClickListener.throttledClickable
+import com.myaxa.features.coin_details.R
 
 @Composable
 internal fun CoinDetailsToolbar(
@@ -42,7 +44,7 @@ internal fun CoinDetailsToolbar(
         ) {
             Image(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Arrow back",
+                contentDescription = stringResource(R.string.back_button),
                 colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
                 modifier = Modifier
                     .throttledClickable(

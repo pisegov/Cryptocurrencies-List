@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="try_again">Try again</string>
+    <string name="error_occurred_try_again">Some kind of error has occurred :(\nShall we try again?</string>
+    <string name="cryptocurrency_logo">Cryptocurrency logo</string>
+</resources>
