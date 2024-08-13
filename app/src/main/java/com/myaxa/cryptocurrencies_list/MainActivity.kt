@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Surface
 import androidx.navigation.compose.rememberNavController
+import com.myaxa.core.ui.theme.CryptocurrenciesListTheme
 import com.myaxa.cryptocurrencies_list.navigation.ApplicationNavigation
 
 class MainActivity : ComponentActivity() {
@@ -13,9 +14,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val navController = rememberNavController()
-            Surface {
-                ApplicationNavigation(navController = navController)
+            CryptocurrenciesListTheme {
+                val navController = rememberNavController()
+                Surface {
+                    ApplicationNavigation(navController = navController)
+                }
             }
         }
     }

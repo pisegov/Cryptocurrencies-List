@@ -17,8 +17,6 @@ val Red = Color(0xFFEB5757)
 
 val Gray = Color(0xFF9B9B9B)
 
-val Background = Color(0xFFF5F5F5)
-
 val Orange = Color(0xFFF7931A)
 val ProgressIndicatorColor = Color(0xFFFF9F00)
 val PearlLusta = Color(0xFFFBEFDC)
