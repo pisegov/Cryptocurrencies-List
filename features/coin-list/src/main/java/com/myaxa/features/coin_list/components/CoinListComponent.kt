@@ -24,10 +24,10 @@ import com.myaxa.core.ui.components.Snackbar
 import com.myaxa.core.ui.theme.DarkGreen
 import com.myaxa.core.ui.throttledClickListener.throttledClickable
 import com.myaxa.features.coin_list.model.ListCoinUi
+import com.myaxa.features.coin_list.model.LoadingStatus
 import com.myaxa.features.coin_list.model.PriceChangePercentage
 import com.myaxa.features.coin_list.mvi.CoinListEffect
 import com.myaxa.features.coin_list.mvi.Event
-import com.myaxa.features.coin_list.mvi.LoadingStatus
 import com.myaxa.features.coin_list.mvi.State
 import com.myaxa.features.coin_list.mvi.isRefreshFailure
 import com.myaxa.features.coin_list.mvi.isRefreshing

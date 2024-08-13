@@ -1,5 +1,6 @@
 package com.myaxa.features.coin_list.mvi
 
+import com.myaxa.features.coin_list.model.LoadingStatus
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

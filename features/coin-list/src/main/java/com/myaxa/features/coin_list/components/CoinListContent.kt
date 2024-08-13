@@ -13,9 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import com.myaxa.core.ui.components.NetworkErrorScreenComponent
 import com.myaxa.core.ui.components.ProgressIndicatorComponent
+import com.myaxa.features.coin_list.model.LoadingStatus
 import com.myaxa.features.coin_list.mvi.CoinListEffect
 import com.myaxa.features.coin_list.mvi.Event
-import com.myaxa.features.coin_list.mvi.LoadingStatus
 import com.myaxa.features.coin_list.mvi.State
 
 @Composable

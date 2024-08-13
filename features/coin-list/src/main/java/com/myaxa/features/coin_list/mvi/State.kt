@@ -3,6 +3,7 @@ package com.myaxa.features.coin_list.mvi
 import androidx.compose.runtime.Stable
 import com.myaxa.core.coin.domain.Currency
 import com.myaxa.features.coin_list.model.ListCoinUi
+import com.myaxa.features.coin_list.model.LoadingStatus
 
 @Stable
 internal data class State(
@@ -17,12 +18,6 @@ internal data class State(
             loadingStatus = LoadingStatus.Loading
         )
     }
-}
-
-internal sealed interface LoadingStatus {
-    data object Idle : LoadingStatus
-    data object Loading : LoadingStatus
-    data object Failure : LoadingStatus
 }
 
 internal fun State.isRefreshing() = list.isNotEmpty() && loadingStatus is LoadingStatus.Loading
