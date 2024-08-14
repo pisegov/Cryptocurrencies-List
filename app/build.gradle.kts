@@ -33,11 +33,16 @@ android {
 
     buildTypes {
         release {
+            signingConfigs {
+                create("release") {
+                    keyAlias = providers.environmentVariable("KEY_ALIAS").get()
+                    keyPassword = providers.environmentVariable("KEY_PASSWORD").get()
+                    storeFile = file(providers.environmentVariable("STORE_FILE").get())
+                    storePassword = providers.environmentVariable("STORE_PASSWORD").get()
+                }
+            }
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            signingConfig = signingConfigs.getByName("release")
         }
         debug {
             applicationIdSuffix = ".debug"

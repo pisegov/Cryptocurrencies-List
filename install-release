@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+./gradlew assembleRelease --console=plain
+
+adb -s $DEBUG_ADB_DEVICE install app/build/outputs/apk/release/app-release.apk
+
+adb -s $DEBUG_ADB_DEVICE shell am start com.myaxa.cryptocurrencies_list/com.myaxa.cryptocurrencies_list.MainActivity
