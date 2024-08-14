@@ -35,10 +35,10 @@ android {
         release {
             signingConfigs {
                 create("release") {
-                    keyAlias = providers.environmentVariable("KEY_ALIAS").get()
-                    keyPassword = providers.environmentVariable("KEY_PASSWORD").get()
-                    storeFile = file(providers.environmentVariable("STORE_FILE").get())
-                    storePassword = providers.environmentVariable("STORE_PASSWORD").get()
+                    keyAlias = System.getenv("KEY_ALIAS")
+                    keyPassword = System.getenv("KEY_PASSWORD")
+                    storeFile = file(System.getenv("STORE_FILE") ?: ".")
+                    storePassword = System.getenv("STORE_PASSWORD")
                 }
             }
             isMinifyEnabled = false

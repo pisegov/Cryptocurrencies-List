@@ -17,7 +17,8 @@ API_KEY="<ваш_api_key>"
 #+end_src
 
 ** Релизная сборка
-Для сборки релизной версии необходимо завести переменные окружения для подписи =apk=
+В дебажной сборке очень тормозит список из-за использования [[https://developer.android.com/develop/ui/compose][Jetpack Compose]].
+Для сборки релизной версии необходимо завести переменные окружения для подписи =apk=.
 #+begin_src shell
 export KEY_ALIAS='key_alias'
 export KEY_PASSWORD='strong_and_complicated_password'
@@ -25,9 +26,20 @@ export STORE_FILE='/path/to/the/keystore.jks'
 export STORE_PASSWORD='another_strong_and_complicated_password'
 #+end_src
 
+Дополнительно можно завести переменную =DEBUG_ADB_DEVICE= для id девайса или эмулятора в =adb= и воспользоваться скриптом =install-release= лежашим в корне проекта.
+#+begin_src shell
+❯ adb devices
+List of devices attached
+<your_device_id>  device
+
+❯ export DEBUG_ADB_DEVICE=<your_device_id>
+
+❯ ./install-release
+#+end_src
+
 * Планирование разработки
-Реализовать приложение планируется за 6 дней
-Каждый день включает в себя 5 часов активного написания кода
+Реализовать приложение планируется за 6 дней.
+Каждый день включает в себя 5 часов активного написания кода.
 
 ** Декомпозиция и оценка времени
 1. Создание проекта и настройка окружения (2 часа)
