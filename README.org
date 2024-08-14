@@ -1,4 +1,29 @@
 #+title: Список криптовалют
+Cписок криптовалют и отдельный экран с чуть более подробной информацией о каждой монете
+
+#+html:   <img src="https://github.com/user-attachments/assets/3579d22b-de99-4cca-92f1-f63abfd829c0" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/ede4c903-0915-43d4-b71c-8b44e6231080" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/d79bf78f-8fc6-49c3-b060-c90f0e10db2f" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/de5ae73a-6dab-4547-8f3a-7a16a099eb30" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/82caf382-0bc4-49bb-ace2-621509741e35" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/be388c90-ba8e-4128-a0e3-045ba785d855" width="180"/>
+
+* Запуск
+- Для сборки использовалась Android Studio Koala 2024.1.1 c Android Gradle Plugin версии 8.5.1
+- В файл =local.properties= в корне проекта положить константы =BASE_URL= и =API_KEY=
+#+begin_src
+BASE_URL="https://api.coingecko.com/api/v3/"
+API_KEY="<ваш_api_key>"
+#+end_src
+
+** Релизная сборка
+Для сборки релизной версии необходимо завести переменные окружения для подписи =apk=
+#+begin_src shell
+export KEY_ALIAS='key_alias'
+export KEY_PASSWORD='strong_and_complicated_password'
+export STORE_FILE='/path/to/the/keystore.jks'
+export STORE_PASSWORD='another_strong_and_complicated_password'
+#+end_src
 
 * Планирование разработки
 Реализовать приложение планируется за 6 дней
@@ -12,11 +37,11 @@
 2. Реализация сетевого слоя (4 часа)
    - Подключение к API криптовалют
    - Создание моделей данных для сети
-   - Реализация Ktor клиента
+   - Реализация =Ktor= клиента
 
 3. Создание базы данных и кэширование (3 часа)
-   - Настройка Room Database
-   - Создание DAO и Entity классов
+   - Настройка =Room Database=
+   - Создание =DAO= и =Entity= классов
    - Реализация методов для кэширования данных
 
 4. Экран списка криптовалют (5 часов)
@@ -25,15 +50,16 @@
 
 5. Экран деталей криптовалюты (4 часа)
    - Реализация UI компонентов на Compose
-   - Реализация состояний загрузки, ошибки и отображения данных
+   - Реализация состояния отображения данных
 
 6. Pull to Refresh на экране списка (2 часа)
-   - Внедрение SwipeRefreshLayout
-   - Обновление данных при потягивании вниз
+   - +Внедрение SwipeRefreshLayout+
+   - +Обновление данных при потягивании вниз+
+   - Создание кастомного =PullToRefreshLazyColumn= c =PullToRefreshContainer= под капотом
 
-7. Кастомный Toast для ошибок (2 часа)
-   - Создание кастомного макета для Toast
-   - Настройка логики показа ошибок через кастомный Toast
+7. Кастомный =Snackbar= для ошибок (2 часа)
+   - Создание кастомного компонента для =Snackbar=
+   - Настройка логики показа ошибок через кастомный =Snackbar=
 
 8. Тестирование, отладка и документирование приложения (3 часа)
 
@@ -41,5 +67,97 @@
 - День 1: Проект и окружение + часть сетевого слоя
 - День 2: Окончание сетевого слоя + база данных и кэширование
 - День 3: Экран списка криптовалют
-- День 4: Экран деталей криптовалюты + Pull to Refresh
-- День 5: Кастомный Toast + тестирование, отладка и документирование
+- День 4: Экран деталей криптовалюты + =Pull to Refresh=
+- День 5: Кастомный =Snackbar= + тестирование, отладка и документирование
+
+* Описание фичей
+Реализация состоит из двух экранов
+1. Экран списка криптовалют
+2. Экран деталей криптовалюты
+
+** Экран со списком криптовалют
+*** Toolbar
+Классический =Toolbar= со статичным заголовком.
+В нем же ниже - "чипсы" (=Chips=), которые используются как переключатель валюты для запроса списка.
+Валюта (USD, RUB) передается в запрос на сервер в качестве =query= параметра. Это определяет, в эквиваленте какой валюты мы получаем цену каждого токена из списка.
+*** Список
+Загружаются первые 30 элементов списка.
+При нажатии на элемент списка осуществляется переход на экран детальной информации о криптовалюте.
+*** Состояния
+На экране 5 состояний:
+- Загрузка данных - отображается индикатор загрузки
+- Список криптовалют - отображается список
+- Ошибка при загрузке - отображается сообщение об ошибке и кнопка для повторной загрузки
+- Обновление данных - отображается список, крутитися =pull-to-refresh=
+- Ошибка обновления данных - отображается список, показывается =snackbar= с ошибкой
+
+** Экран с детальной информацией о криптовалюте
+*** Toolbar
+Сверху все тот же простой =Toolbar= с кнопкой навигации назад.
+В качестве заголовка - название криптовалюты, которую смотрим.
+*** Информация о криптовалюте
+Информация состоит из изображения криптовалюты, описания и перечисления категорий.
+Перечисление категорий - это поле =categories= из получаемого с сервера объекта.
+*** Состояния
+Тут 3 базовых состояния:
+- Загрузка данных - отображается индикатор загрузки
+- Список криптовалют - отображаются детали криптовалюты
+- Ошибка при загрузке - отображается сообщение об ошибке и кнопка для повторной загрузки
+
+* Архитектура презентационного слоя
+В качестве архитектуры выбрана реализация MVI по следующей схеме:
+
+#+html:   <img src="https://github.com/user-attachments/assets/e6305fb2-8098-4561-8db0-0ca9d3f3a065"/>
+
+** Компоненты
+- =Actor= - компонент, отвечающий за выполнения сложных или IO операций
+- =Reducer= - компонент, отвечающий за изменение состояния экрана
+- =State= - состояние экрана
+  - State value - текущее значение состояния
+  - State update - обновление состояния
+
+** Действия
+- =Event= - события, направленные на изменение состояния
+  - =User= - событие взаимодействия пользователя с интерфейсом
+  - =System= - внутреннее событие, несущее в себе результат выполнения операции
+- =Command= - команда для =Actor= на выполнение сложной операции
+
+** Переходы
+- Сплошная линия - прямой вызов
+- Пунктирная линия - экспорт с помощью [[https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/][Flow]]
+
+* Темная тема
+Дополнительно реализована темная тема
+#+html:   <img src="https://github.com/user-attachments/assets/3f9861b0-fa70-4515-8906-f671f8d734a8" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/185e61a7-6ad7-4b69-97e6-80773b81897d" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/38fd4cbe-7835-4f4d-8842-89e58dc6b573" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/933693e1-0875-4599-8786-ac6bfd3a9b76" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/377c16b1-8c0b-46b7-b35b-363c7a7a0b2f" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/9afd6d7c-c513-4cf4-a3c7-d4da5e64d3ac" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/48ed0692-a1c0-4f62-aeb7-c2a9b438acda" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/189bfb15-71f3-46c4-accc-f466efab2ff7" width="180"/>
+#+html:   <img src="https://github.com/user-attachments/assets/1003b9e3-0f23-41bd-9cb3-db41f763e8b6" width="180"/>
+
+* Описание модулей
+- =core:coin= - модуль для работы с данными криптовалют
+- =core:database= - модуль для работы с базой данных
+- =core:network= - базовые компоненты для работы с сетью
+- =core:ui= - общие ui компоненты и цветовые темы приложения
+- =core:viewmodel-inject= - утилиты для inject'a ViewModel'ей
+
+- =features:coin-list= - экран отображения списка криптовалют
+- =features:coin-details= - экран отображения деталей криптовалют
+
+- =app= - сборка приложения
+
+* Технологический стек
+- Android SDK
+- [[https://developer.android.com/jetpack][Android Jetpack]]
+- [[https://kotlinlang.org/docs/whatsnew20.html][Kotlin 2.0]]
+- [[https://github.com/Kotlin/kotlinx.coroutines][KotlinX Coroutines]]
+- [[https://github.com/Kotlin/kotlinx.serialization][KotlinX Serialization]]
+- [[https://ktor.io/][Ktor client]] + [[https://square.github.io/okhttp/][OkHttp]]
+- [[https://developer.android.com/develop/ui/compose][Jetpack Compose]]
+- [[https://developer.android.com/develop/ui/compose/navigation][Jetpack Compose Navigation]]
+- [[https://dagger.dev][Dagger 2]]
+- [[https://github.com/material-components/material-components-android][Material]]
