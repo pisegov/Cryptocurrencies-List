@@ -20,7 +20,8 @@ import com.myaxa.core.database.coin.entities.CoinPriceEntity
         CoinCategoryEntity::class,
         CoinCategoryCrossRef::class,
     ],
-    version = 1
+    version = 1,
+    exportSchema = false,
 )
 abstract class CryptocurrenciesListDatabase : RoomDatabase() {
     abstract val coinDao: CoinDao

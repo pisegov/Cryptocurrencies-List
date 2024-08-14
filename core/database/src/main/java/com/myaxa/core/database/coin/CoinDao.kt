@@ -20,21 +20,24 @@ interface CoinDao {
     @Query("select * from coin")
     suspend fun getCoinsWithPrices(): List<CoinWithPrices>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCoins(items: List<CoinEntity>)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPrices(items: List<CoinPriceEntity>)
 
     @Transaction
     @Query("select * from coin where coin_id=:id")
     suspend fun getCoinDetails(id: String): CoinDetailsFull
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Query("select category_id from category where name in (:names)")
+    suspend fun getCategoryIds(names: List<String>): List<Long>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCoinDescription(item: CoinDescriptionEntity)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertCoinCategories(items: List<CoinCategoryEntity>): List<Long>
+    suspend fun insertCoinCategories(items: List<CoinCategoryEntity>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCoinToCategoriesCrossRefs(items: List<CoinCategoryCrossRef>)

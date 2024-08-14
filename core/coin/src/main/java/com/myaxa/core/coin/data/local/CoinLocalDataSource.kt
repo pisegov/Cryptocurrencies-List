@@ -42,12 +42,18 @@ class CoinLocalDataSource internal constructor(
 
     suspend fun insertCoinDetails(item: CoinDetails) = withContext(Dispatchers.IO) {
         val description = CoinDescriptionEntity(item.id, item.description)
-        val categories = item.categories.map { CoinCategoryEntity(name = it) }
+        val categoryNames = item.categories
+        val categories = categoryNames.map { CoinCategoryEntity(name = it) }
 
-        coinDao.insertCoinDescription(description)
-        val crossRefs = coinDao.insertCoinCategories(categories)
-            .map { categoryId -> CoinCategoryCrossRef(item.id, categoryId) }
-        coinDao.insertCoinToCategoriesCrossRefs(crossRefs)
+        db.withTransaction {
+            with(coinDao) {
+                insertCoinDescription(description)
+                insertCoinCategories(categories)
+                val crossRefs = getCategoryIds(categoryNames)
+                    .map { categoryId -> CoinCategoryCrossRef(item.id, categoryId) }
+                insertCoinToCategoriesCrossRefs(crossRefs)
+            }
+        }
     }
 
     suspend fun getCoinDetails(id: CoinId): CoinDetailsFull = withContext(Dispatchers.IO) {

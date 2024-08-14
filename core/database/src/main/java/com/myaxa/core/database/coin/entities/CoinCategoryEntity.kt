@@ -17,6 +17,7 @@ data class CoinCategoryEntity(
 @Entity(
     tableName = "coin_to_category",
     primaryKeys = ["coin_id", "category_id"],
+    indices = [Index(value = ["category_id"], unique = false)]
 )
 data class CoinCategoryCrossRef(
     @ColumnInfo("coin_id") val coinId: String,
