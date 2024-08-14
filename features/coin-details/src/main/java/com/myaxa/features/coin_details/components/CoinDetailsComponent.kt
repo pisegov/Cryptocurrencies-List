@@ -44,17 +44,19 @@ internal fun CoinDetailsComponent(
                 modifier = Modifier.size(90.dp)
             )
         }
-        item {
-            TextSectionComponent(
-                title = stringResource(R.string.description),
-                content = model.description
-            )
+        if (model.description.isNotEmpty()) {
+            item {
+                TextSectionComponent(
+                    title = stringResource(R.string.description),
+                    content = model.description,
+                )
+            }
         }
         if (model.categories.isNotEmpty()) {
             item {
                 TextSectionComponent(
                     title = stringResource(R.string.categories),
-                    content = model.categories
+                    content = model.categories,
                 )
             }
         }
