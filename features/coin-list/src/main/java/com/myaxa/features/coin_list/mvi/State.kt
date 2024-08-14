@@ -5,6 +5,12 @@ import com.myaxa.core.coin.domain.Currency
 import com.myaxa.features.coin_list.model.ListCoinUi
 import com.myaxa.features.coin_list.model.LoadingStatus
 
+/**
+ * Screen state model
+ *
+ * Combines [loadingStatus] states with [list] states (empty or not)
+ * and [currentCurrency]
+ */
 @Stable
 internal data class State(
     val currentCurrency: Currency,
@@ -21,7 +27,5 @@ internal data class State(
 }
 
 internal fun State.isRefreshing() = list.isNotEmpty() && loadingStatus is LoadingStatus.Loading
-
-internal fun State.isInitialized() = list.isNotEmpty() || loadingStatus !is LoadingStatus.Idle
 
 internal fun State.isRefreshFailure() = list.isNotEmpty() && loadingStatus is LoadingStatus.Failure

@@ -60,8 +60,9 @@ internal fun CoinListContent(
                     )
                 }
 
-                // Initial state, show empty screen
-                LoadingStatus.Idle -> {}
+                LoadingStatus.Idle -> {
+                    sendUserEvent(Event.User.LoadInitial)
+                }
             }
         }
     }

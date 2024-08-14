@@ -18,7 +18,7 @@ class CoinRepository @Inject constructor(
 ) {
     suspend fun getCoinsList(currency: Currency = Currency.USD): Result<List<ListCoin>> = safeCall {
 
-        val remoteList: List<ListCoinRemote> = networkDataSource.getCoinsList(currency = currency)
+        val remoteList: List<ListCoinRemote> = networkDataSource.getCoinList(currency = currency)
 
         val list = remoteList.map { it.toDomainModel() }
 

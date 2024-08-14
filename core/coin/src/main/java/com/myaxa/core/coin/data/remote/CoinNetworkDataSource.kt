@@ -18,7 +18,15 @@ fun CoinNetworkDataSource(networkClientProvider: NetworkClientProvider): CoinNet
 
 class CoinNetworkDataSource internal constructor(private val client: HttpClient) {
 
-    internal suspend fun getCoinsList(
+    /**
+     * Loads cryptocurrency list
+     *
+     * @param currency currency in which to load
+     * the equivalent cryptocurrency list
+     * @return list of cryptocurrencies in the form of [ListCoinRemote] model
+     */
+
+    internal suspend fun getCoinList(
         currency: Currency = Currency.USD,
         @IntRange(from = 1, to = 100) number: Int = 30,
     ): List<ListCoinRemote> = withContext(Dispatchers.IO) {
@@ -27,6 +35,12 @@ class CoinNetworkDataSource internal constructor(private val client: HttpClient)
             .body<List<ListCoinRemote>>()
     }
 
+    /**
+     * Loads cryptocurrency details
+     *
+     * @param id currency id on a remote server
+     * @return remote model of cryptocurrency details
+     */
     internal suspend fun getCoinDetails(
         id: CoinId,
     ): CoinDetailsRemote = withContext(Dispatchers.IO) {

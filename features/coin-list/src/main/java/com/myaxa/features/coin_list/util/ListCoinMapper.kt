@@ -11,6 +11,10 @@ import com.myaxa.features.coin_list.model.PriceChangePercentage
 import javax.inject.Inject
 import kotlin.math.abs
 
+/**
+ * Mapper that converts [ListCoin] model
+ * to [ListCoinUi] according to the current [Currency]
+ * */
 internal class ListCoinMapper @Inject constructor(
     private val decimalFormatter: DecimalStringFormatter,
 ) {
@@ -21,7 +25,7 @@ internal class ListCoinMapper @Inject constructor(
             id = id,
             name = name,
             symbol = symbol.uppercase(),
-            imageUrl = image,
+            imageUrl = imageUrl,
             currentPrice = composeCurrentPriceString(number = currentPrice, currency = currency),
             priceChangePercentage = composePriceChangePercentageModel(number = priceChangePercentage)
         )

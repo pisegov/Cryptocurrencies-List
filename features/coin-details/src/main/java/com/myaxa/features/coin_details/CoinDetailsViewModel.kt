@@ -13,6 +13,11 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
+/**
+ * Responsible for saving the screen state and processing events to update it
+ * @param reducer updates screen state
+ * @param actor performs complex operations
+ */
 internal class CoinDetailsViewModel @Inject constructor(
     private val reducer: Reducer,
     private val actor: Actor,
@@ -24,11 +29,13 @@ internal class CoinDetailsViewModel @Inject constructor(
     fun obtainUserEvent(event: Event.User) = reduce(event)
 
     private fun reduce(event: Event) = _state.update {
-        reducer.reduce(event, it)
+        reducer.reduce(event = event, state = it)
     }
 
     init {
-        reducer.commandFlow.onEach { actor.processCommand(it) }.launchIn(viewModelScope)
+        // Connects events flow from [Actor] to [Reducer]
+        reducer.commandFlow.onEach { actor.processCommand(command = it) }.launchIn(viewModelScope)
+        // Connects commands flow from [Reducer] to [Actor]
         actor.systemEventFlow.onEach { reduce(event = it) }.launchIn(viewModelScope)
     }
 }

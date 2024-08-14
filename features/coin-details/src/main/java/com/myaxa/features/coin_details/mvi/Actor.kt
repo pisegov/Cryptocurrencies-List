@@ -7,9 +7,18 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
 
+/**
+ * Complex operation processor
+ * Receives [Command] from [Reducer] to perform operation
+ * Sends [Event.System] to [Reducer] to update the [State] with operation result
+ */
 internal class Actor @Inject constructor(
     private val repository: CoinRepository,
 ) {
+
+    /**
+     * Flow of [Event.System] to return complex operation result
+     */
     private val _systemEventFlow = MutableSharedFlow<Event.System>(
         replay = 0,
         extraBufferCapacity = 1,

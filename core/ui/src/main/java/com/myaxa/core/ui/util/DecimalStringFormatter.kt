@@ -5,6 +5,10 @@ import java.text.DecimalFormatSymbols
 import java.util.Locale
 import javax.inject.Inject
 
+/**
+ * Formats decimal to formatted string
+ * For example: 61215 -> 61,215.00
+ */
 class DecimalStringFormatter @Inject constructor() {
 
     private val pattern = "#,##0.00"

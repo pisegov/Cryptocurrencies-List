@@ -4,6 +4,11 @@ import androidx.compose.runtime.Stable
 import com.myaxa.core.coin.domain.CoinDetails
 import com.myaxa.core.coin.domain.CoinId
 
+/**
+ * Cryptocurrency details ui model
+ *
+ * @see [com.myaxa.core.coin.domain.CoinDetails]
+ */
 @Stable
 internal data class CoinDetailsUi(
     val id: CoinId,

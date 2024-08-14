@@ -5,6 +5,10 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+/**
+ * Entity for a coin category
+ * Refers to the [CoinEntity] in a many-to-many relation
+ */
 @Entity(
     tableName = "category",
     indices = [Index(value = ["name"], unique = true)],
@@ -14,6 +18,11 @@ data class CoinCategoryEntity(
     @ColumnInfo("name") val name: String,
 )
 
+
+/**
+ * Auxiliary entity to maintain a many-to-many relationship
+ * between the [CoinEntity] and [CoinCategoryEntity] tables.
+ */
 @Entity(
     tableName = "coin_to_category",
     primaryKeys = ["coin_id", "category_id"],

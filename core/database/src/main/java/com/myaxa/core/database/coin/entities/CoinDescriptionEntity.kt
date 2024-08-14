@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Entity for a coin description
+ */
 @Entity(tableName = "description")
 data class CoinDescriptionEntity(
     @ColumnInfo("coin_id") @PrimaryKey val coinId: String,

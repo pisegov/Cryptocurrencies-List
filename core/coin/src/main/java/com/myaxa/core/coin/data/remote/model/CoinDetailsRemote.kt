@@ -1,10 +1,15 @@
 package com.myaxa.core.coin.data.remote.model
 
 
+import com.myaxa.core.coin.domain.CoinDetails
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import com.myaxa.core.coin.domain.CoinDetails as CoinDetails1
 
+/**
+ * Cryptocurrency details remote model
+ *
+ * @see CoinDetails
+ */
 @Serializable
 internal data class CoinDetailsRemote(
     @SerialName("id")
@@ -18,7 +23,7 @@ internal data class CoinDetailsRemote(
     @SerialName("categories")
     val categories: List<String>,
 ) {
-    fun toDomainModel(): CoinDetails1 = CoinDetails1(
+    fun toDomainModel(): CoinDetails = CoinDetails(
         id = id,
         name = name,
         imageUrl = image.small,

@@ -5,6 +5,11 @@ import com.myaxa.core.coin.domain.ListCoin
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Cryptocurrency in a list remote model
+ *
+ * @see ListCoin
+ * */
 @Serializable
 internal data class ListCoinRemote(
     @SerialName("id")
@@ -24,7 +29,7 @@ internal data class ListCoinRemote(
         id = id,
         name = name,
         symbol = symbol,
-        image = image,
+        imageUrl = image,
         currentPrice = currentPrice,
         priceChangePercentage = priceChangePercentage,
     )

@@ -20,7 +20,7 @@ interface CoinDao {
     @Query("select * from coin")
     suspend fun getCoinsWithPrices(): List<CoinWithPrices>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCoins(items: List<CoinEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
